@@ -1,0 +1,29 @@
+@import "variables";
+
+.navbar {
+  background-color: $background-dark;
+  padding: $spacing-sm $spacing-md;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+
+  .nav-links {
+    display: flex;
+    justify-content: center;
+    gap: $spacing-md;
+  }
+
+  .nav-link {
+    color: $text-light;
+    text-decoration: none;
+    font-size: $font-size-base * 1.1;
+    font-weight: 500;
+    transition: color $transition-speed ease;
+
+    &:hover {
+      color: $primary-color;
+    }
+  }
+}
