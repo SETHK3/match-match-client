@@ -1,0 +1,79 @@
+@import "variables";
+
+.search-container {
+  display: flex;
+  justify-content: center;
+  padding: $spacing-lg;
+  margin-top: -$spacing-lg;
+}
+
+.search-form {
+  background: rgba(255, 255, 255, 0.1);
+  padding: $spacing-lg;
+  border-radius: $border-radius;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 600px;
+}
+
+.input-group {
+  margin-bottom: $spacing-md;
+
+  label {
+    display: block;
+    color: $text-light;
+    margin-bottom: $spacing-sm;
+    font-weight: 500;
+  }
+
+  input {
+    width: 100%;
+    padding: $spacing-sm;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: $border-radius;
+    background: rgba(255, 255, 255, 0.05);
+    color: $text-light;
+    font-size: $font-size-base;
+    transition: all $transition-speed ease;
+
+    &:focus {
+      outline: none;
+      border-color: $primary-color;
+      box-shadow: 0 0 0 2px rgba($primary-color, 0.2);
+    }
+
+    &::placeholder {
+      color: rgba($text-light, 0.5);
+    }
+  }
+}
+
+.date-range {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $spacing-md;
+}
+
+.search-button {
+  width: 100%;
+  padding: $spacing-sm;
+  background: $primary-color;
+  color: $text-light;
+  border: none;
+  border-radius: $border-radius;
+  font-size: $font-size-base;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all $transition-speed ease;
+  margin-top: $spacing-md;
+
+  &:hover {
+    background: darken($primary-color, 10%);
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}

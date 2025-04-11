@@ -1,4 +1,5 @@
 import React from "react";
+import SearchForm from "./SearchForm";
 import "../styles/HomePage.scss";
 
 const HomePage = () => {
@@ -8,6 +9,7 @@ const HomePage = () => {
         <h1>MatchMatch</h1>
         <p>Your Ultimate Football Match Finder</p>
       </div>
+      <SearchForm />
     </div>
   );
 };
