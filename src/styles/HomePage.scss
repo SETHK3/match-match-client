@@ -3,7 +3,7 @@
 .home-container {
   min-height: 100vh;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
   background: $background-gradient;
   padding-top: $navbar-height;
@@ -11,24 +11,33 @@
 
 .title-card {
   background: rgba(255, 255, 255, 0.1);
-  padding: $spacing-lg $spacing-lg * 1.67;
+  padding: $spacing-lg $spacing-lg * 2;
   border-radius: $border-radius;
   text-align: center;
   backdrop-filter: blur(10px);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  margin: $spacing-lg 0;
+  width: 100%;
+  max-width: 800px;
+}
 
-  h1 {
-    color: $text-light;
-    font-size: $font-size-xl;
-    margin: 0;
-    margin-bottom: $spacing-sm;
-    font-weight: 700;
-  }
+.title-card h1 {
+  color: $text-light;
+  font-size: $font-size-xl;
+  margin: 0;
+  margin-bottom: $spacing-sm;
+  font-weight: 700;
+}
 
-  p {
-    color: $primary-color;
-    font-size: $font-size-lg;
-    margin: 0;
-    font-weight: 500;
-  }
+.title-card p {
+  color: $primary-color;
+  font-size: $font-size-lg;
+  margin: 0;
+  font-weight: 500;
+}
+
+.search-section {
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 $spacing-lg;
 }

@@ -9,7 +9,9 @@ const HomePage = () => {
         <h1>MatchMatch</h1>
         <p>Your Ultimate Football Match Finder</p>
       </div>
-      <SearchForm />
+      <div className="search-section">
+        <SearchForm />
+      </div>
     </div>
   );
 };
