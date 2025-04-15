@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "../styles/LeagueSelector.scss";
 
 const leagues = [
@@ -26,28 +26,35 @@ const leagues = [
 ];
 
 const LeagueSelector = () => {
+  const [selectedLeague, setSelectedLeague] = useState("all");
+
+  const handleLeagueSelect = (leagueValue) => {
+    setSelectedLeague(leagueValue);
+  };
+
   return (
     <div className="league-selection">
-      <label className="league-label">Select League</label>
-      <div className="radio-group">
+      <h2 className="league-heading">Select League</h2>
+      <div className="league-cards">
         {leagues.map((league) => (
-          <label key={league.value} className="radio-label">
-            <input
-              type="radio"
-              name="league"
-              value={league.value}
-              defaultChecked={league.value === "all"}
-            />
-            <span className="radio-custom"></span>
-            <span>{league.label}</span>
-            {league.logo && (
+          <div
+            key={league.value}
+            className={`league-card ${
+              selectedLeague === league.value ? "selected" : ""
+            }`}
+            onClick={() => handleLeagueSelect(league.value)}
+          >
+            {league.logo ? (
               <img
                 src={league.logo}
                 alt={league.label}
                 className="league-logo"
               />
+            ) : (
+              <div className="placeholder-logo">All</div>
             )}
-          </label>
+            <span className="league-name">{league.label}</span>
+          </div>
         ))}
       </div>
     </div>
