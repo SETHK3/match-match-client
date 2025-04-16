@@ -26,21 +26,47 @@ const leagues = [
 ];
 
 const LeagueSelector = () => {
-  const [selectedLeague, setSelectedLeague] = useState("all");
+  const [selectedLeagues, setSelectedLeagues] = useState(["all"]);
 
   const handleLeagueSelect = (leagueValue) => {
-    setSelectedLeague(leagueValue);
+    // If "All Leagues" is selected
+    if (leagueValue === "all") {
+      // If "All Leagues" is already selected, deselect it
+      if (selectedLeagues.includes("all")) {
+        setSelectedLeagues([]);
+      } else {
+        // Otherwise, select only "All Leagues"
+        setSelectedLeagues(["all"]);
+      }
+      return;
+    }
+
+    // If we're selecting a specific league
+    if (selectedLeagues.includes(leagueValue)) {
+      // If already selected, remove it
+      setSelectedLeagues(
+        selectedLeagues.filter((value) => value !== leagueValue)
+      );
+    } else {
+      // If "All Leagues" is currently selected, remove it and add the specific league
+      if (selectedLeagues.includes("all")) {
+        setSelectedLeagues([leagueValue]);
+      } else {
+        // Otherwise add this league to the selection
+        setSelectedLeagues([...selectedLeagues, leagueValue]);
+      }
+    }
   };
 
   return (
     <div className="league-selection">
-      <h2 className="league-heading">Select League</h2>
+      <h2 className="league-heading">Select Leagues</h2>
       <div className="league-cards">
         {leagues.map((league) => (
           <div
             key={league.value}
             className={`league-card ${
-              selectedLeague === league.value ? "selected" : ""
+              selectedLeagues.includes(league.value) ? "selected" : ""
             }`}
             onClick={() => handleLeagueSelect(league.value)}
           >
