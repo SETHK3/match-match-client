@@ -1,3 +1,5 @@
+@use "variables" as *;
+
 .date-range {
   display: grid;
   grid-template-columns: 1fr 1fr;

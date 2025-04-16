@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useCallback, memo } from "react";
 import "../styles/LeagueSelector.scss";
 
+// Move league data outside component to avoid recreation on renders
 const leagues = [
   { value: "all", label: "All Leagues", logo: null },
   {
@@ -25,62 +26,68 @@ const leagues = [
   },
 ];
 
+// Create a memoized league card component
+const LeagueCard = memo(({ league, isSelected, onSelect }) => (
+  <div
+    className={`league-card ${isSelected ? "selected" : ""}`}
+    onClick={() => onSelect(league.value)}
+  >
+    {league.logo ? (
+      <img src={league.logo} alt={league.label} className="league-logo" />
+    ) : (
+      <div className="placeholder-logo">All</div>
+    )}
+    <span className="league-name">{league.label}</span>
+  </div>
+));
+
 const LeagueSelector = () => {
   const [selectedLeagues, setSelectedLeagues] = useState(["all"]);
 
-  const handleLeagueSelect = (leagueValue) => {
-    // If "All Leagues" is selected
-    if (leagueValue === "all") {
-      // If "All Leagues" is already selected, deselect it
-      if (selectedLeagues.includes("all")) {
-        setSelectedLeagues([]);
-      } else {
-        // Otherwise, select only "All Leagues"
-        setSelectedLeagues(["all"]);
+  const handleLeagueSelect = useCallback(
+    (leagueValue) => {
+      // If "All Leagues" is selected
+      if (leagueValue === "all") {
+        // If "All Leagues" is already selected, deselect it
+        if (selectedLeagues.includes("all")) {
+          setSelectedLeagues([]);
+        } else {
+          // Otherwise, select only "All Leagues"
+          setSelectedLeagues(["all"]);
+        }
+        return;
       }
-      return;
-    }
 
-    // If we're selecting a specific league
-    if (selectedLeagues.includes(leagueValue)) {
-      // If already selected, remove it
-      setSelectedLeagues(
-        selectedLeagues.filter((value) => value !== leagueValue)
-      );
-    } else {
-      // If "All Leagues" is currently selected, remove it and add the specific league
-      if (selectedLeagues.includes("all")) {
-        setSelectedLeagues([leagueValue]);
-      } else {
-        // Otherwise add this league to the selection
-        setSelectedLeagues([...selectedLeagues, leagueValue]);
-      }
-    }
-  };
+      // If we're selecting a specific league
+      setSelectedLeagues((prev) => {
+        if (prev.includes(leagueValue)) {
+          // If already selected, remove it
+          return prev.filter((value) => value !== leagueValue);
+        } else {
+          // If "All Leagues" is currently selected, remove it and add the specific league
+          if (prev.includes("all")) {
+            return [leagueValue];
+          } else {
+            // Otherwise add this league to the selection
+            return [...prev, leagueValue];
+          }
+        }
+      });
+    },
+    [selectedLeagues]
+  );
 
   return (
     <div className="league-selection">
       <h2 className="league-heading">Select Leagues</h2>
       <div className="league-cards">
         {leagues.map((league) => (
-          <div
+          <LeagueCard
             key={league.value}
-            className={`league-card ${
-              selectedLeagues.includes(league.value) ? "selected" : ""
-            }`}
-            onClick={() => handleLeagueSelect(league.value)}
-          >
-            {league.logo ? (
-              <img
-                src={league.logo}
-                alt={league.label}
-                className="league-logo"
-              />
-            ) : (
-              <div className="placeholder-logo">All</div>
-            )}
-            <span className="league-name">{league.label}</span>
-          </div>
+            league={league}
+            isSelected={selectedLeagues.includes(league.value)}
+            onSelect={handleLeagueSelect}
+          />
         ))}
       </div>
     </div>

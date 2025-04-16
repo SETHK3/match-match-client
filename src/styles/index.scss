@@ -12,20 +12,27 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #f8f9fa;
+  color: #343a40;
 }
 
-.App {
-  min-height: 100vh;
-  background-color: $background-dark;
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
 }
 
-.placeholder {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: $text-light;
-  font-size: $font-size-lg;
-  padding-top: $navbar-height;
-  background: $background-gradient;
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
 }
